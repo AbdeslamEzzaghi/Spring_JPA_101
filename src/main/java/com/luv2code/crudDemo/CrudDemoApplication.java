@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CrudDemoApplication {
 
@@ -19,8 +21,16 @@ public class CrudDemoApplication {
 		// Java Lambda Expression
 		return runner -> {
 			//createStudent(studentDAO);
-			readStudent(studentDAO);
+			//readStudent(studentDAO);
+			queryForStudents(studentDAO);
 		};
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		List<Student> studentsList = studentDAO.findAll();
+		for(Student tempStudent:studentsList){
+			System.out.println(tempStudent);
+		}
 	}
 
 	private void readStudent(StudentDAO studentDAO) {
@@ -32,7 +42,7 @@ public class CrudDemoApplication {
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
-		Student newStudent = new Student("Ayoub","Lkaabi","KaabiNueve@luv2code.com");
+		Student newStudent = new Student("Ray","Pin","RP@junior.com");
 
 		System.out.println("Saving the student .........");
 		studentDAO.save(newStudent);
