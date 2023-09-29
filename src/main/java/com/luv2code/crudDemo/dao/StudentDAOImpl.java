@@ -33,9 +33,24 @@ public class StudentDAOImpl implements StudentDAO{
     @Override
     public List<Student> findAll() {
         String firstName = "Chad";
-        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE firstName=:firstName OR lasName=:lastName",Student.class);
+        TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student WHERE firstName=:firstName OR lastName=:lastName",Student.class);
+        // order by lastName (asc by default)
         theQuery.setParameter("firstName",firstName);
         theQuery.setParameter("lastName","Lkaabi");
         return theQuery.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
+    }
+
+    @Override
+    @Transactional
+    public void updateEmailByLastName(String lastName) {
+        String JPQL = "UPDATE Student s SET s.email = CONCAT(SUBSTRING(s.email, 1, POSITION('@' IN s.email)-1),'@luv2score.com') WHERE s.lastName= :lastName";
+        int updateId = entityManager.createQuery(JPQL).setParameter("lastName",lastName).executeUpdate();
+        System.out.println(updateId+" row(s) has been updated");
     }
 }

@@ -15,7 +15,7 @@ public class Student {
     private String firstName;
 
     @Column(name = "last_name")
-    private String lasName;
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -26,7 +26,7 @@ public class Student {
 
     public Student(String firstName, String lasName, String email) {
         this.firstName = firstName;
-        this.lasName = lasName;
+        this.lastName = lasName;
         this.email = email;
     }
 
@@ -47,11 +47,11 @@ public class Student {
     }
 
     public String getLasName() {
-        return lasName;
+        return lastName;
     }
 
     public void setLasName(String lasName) {
-        this.lasName = lasName;
+        this.lastName = lasName;
     }
 
     public String getEmail() {
@@ -67,7 +67,7 @@ public class Student {
         return "Student{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
-                ", lasName='" + lasName + '\'' +
+                ", lasName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

@@ -22,9 +22,28 @@ public class CrudDemoApplication {
 		return runner -> {
 			//createStudent(studentDAO);
 			//readStudent(studentDAO);
-			queryForStudents(studentDAO);
+			//queryForStudents(studentDAO);
+			//updateStudent(studentDAO);
+			updateStudentEmail(studentDAO);			
 		};
 	}
+
+	private void updateStudentEmail(StudentDAO studentDAO) {
+		String theLastName = "Lkaabi";
+		studentDAO.updateEmailByLastName(theLastName);
+	}
+
+	private void updateStudent(StudentDAO studentDAO) {
+		// first of all find the student that we'll update using his id
+		Integer studentId = 3000;
+		Student theStudent = studentDAO.findById(studentId);
+		// update the student
+		// Conner to Connor
+		theStudent.setFirstName("Connor");
+		// modify it in the dataBase
+		studentDAO.update(theStudent);
+	}
+
 
 	private void queryForStudents(StudentDAO studentDAO) {
 		List<Student> studentsList = studentDAO.findAll();
